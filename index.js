@@ -1,10 +1,16 @@
 import express from 'express';
 import session from 'express-session';
 import { PrismaClient } from '@prisma/client';
-
+import cors from 'cors';
 
 const app = express();
 const port = 3000;
+
+const corsOptions = {
+    origin: ["http://localhost:5173"],
+};
+
+app.use(cors(corsOptions));
 
 // Session Setup 
 app.use(session({ 
@@ -22,6 +28,7 @@ app.use(session({
 })) 
 
 app.use(express.json());
+app.use(express.static('public'));
 
 // users
 import users from './routes/users.js';
